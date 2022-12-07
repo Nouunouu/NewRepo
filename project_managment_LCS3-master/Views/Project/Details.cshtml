@@ -1,0 +1,84 @@
+﻿@using System.Activities.Expressions
+@using Microsoft.Ajax.Utilities
+@model project.Models.project
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>@Html.DisplayFor(model=>model.name)</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.user.FirstName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.user.FirstName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.description)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.description)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.endDate)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.endDate)
+		</dd>
+
+	</dl>
+
+	@if (!Model.tasks.Any())
+	{
+		<div class="alert alert-warning" role="alert">
+			<i class="bi bi-exclamation-triangle"></i>
+			No task found!
+		</div>
+	}
+	else
+	{
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Start Date</th>
+				<th>End date</th>
+				<th>State</th>
+			</tr>
+
+			@foreach (var item in Model.tasks)
+			{
+				<tr>
+					<td>@Html.DisplayFor(modelItem => item.name)</td>
+					<td>@Html.DisplayFor(modelItem => item.description)</td>
+					<td>@Html.DisplayFor(modelItem => item.startDate)</td>
+					<td>@Html.DisplayFor(modelItem => item.endDate)</td>
+					<td>@Html.DisplayFor(modelItem => item.workflow)</td>
+				</tr>
+			}
+		</table>
+	}
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.projectId }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
